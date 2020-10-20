@@ -7,21 +7,23 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      videoIndex: 0
+      currentVideo: exampleVideos[0],
+      videosList: exampleVideos
     };
-    this.onVideoEntryClick = this.onVideoEntryClick.bind(this);
+    this.clickEvent = this.clickEvent.bind(this);
   }
 
   // click handler
   //<div class="video-list-entry-title"> is the button
-  // ('.video-list-entry-title')}.on('click', function() {
-  //    console.log('hi')
-  // });
+  //{('.video-list-entry-title')}.on('click', function() {
+  //  console.log('hi')
+  //});
 
-  onVideoEntryClick() {
+  clickEvent(video) {
     this.setState(state => ({
-      videoIndex: 0
+      currentVideo: video
     }));
+    console.log(video);
   }
 
   render() {
@@ -34,10 +36,10 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={exampleVideos[this.state.videoIndex]} />
+            <VideoPlayer video={this.state.currentVideo} />
           </div>
           <div className="col-md-5">
-            <VideoList videos={exampleVideos} />
+            <VideoList videos={this.state.videosList} onclick={this.clickEvent}/>
           </div>
         </div>
       </div>
