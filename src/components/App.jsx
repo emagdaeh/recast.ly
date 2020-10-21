@@ -1,6 +1,7 @@
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 import exampleVideos from '../data/exampleVideoData.js';
+import SearchBar from './Search.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,20 +11,13 @@ class App extends React.Component {
       currentVideo: exampleVideos[0],
       videosList: exampleVideos
     };
-    this.clickEvent = this.clickEvent.bind(this);
+    //this.clickEvent = this.clickEvent.bind(this);
   }
-
-  // click handler
-  //<div class="video-list-entry-title"> is the button
-  //{('.video-list-entry-title')}.on('click', function() {
-  //  console.log('hi')
-  //});
 
   clickEvent(video) {
     this.setState(state => ({
       currentVideo: video
     }));
-    console.log(video);
   }
 
   render() {
@@ -31,7 +25,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <SearchBar />
           </div>
         </nav>
         <div className="row">
@@ -39,7 +33,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo} />
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.videosList} onclick={this.clickEvent}/>
+            <VideoList videos={this.state.videosList} clickE={this.clickEvent.bind(this)}/>
           </div>
         </div>
       </div>
@@ -47,25 +41,6 @@ class App extends React.Component {
   }
 }
 
-/*
-var App = () => (
-  <div>
-    <nav className="navbar">
-      <div className="col-md-6 offset-md-3">
-        <div><h5><em>search</em> view goes here</h5></div>
-      </div>
-    </nav>
-    <div className="row">
-      <div className="col-md-7">
-        <VideoPlayer video={exampleVideos[0]}/>
-      </div>
-      <div className="col-md-5">
-        <VideoList videos={exampleVideos}/>
-      </div>
-    </div>
-  </div>
-);
-*/
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 export default App;
