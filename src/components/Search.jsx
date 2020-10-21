@@ -6,6 +6,11 @@ class Search extends React.Component {
       value: ''
     };
   }
+  handleEvent(searchResult) {
+    this.setState = {
+      value: searchResult
+    };
+  }
 
 
   render() {

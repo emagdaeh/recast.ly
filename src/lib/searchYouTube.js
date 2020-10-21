@@ -12,7 +12,6 @@ var searchYouTube = ({key = YOUTUBE_API_KEY, query, max = 5}, callback = () => {
   })
 
     .done(function(parameter) {
-      console.log('Success', parameter);
       callback(parameter.items);
     })
 
