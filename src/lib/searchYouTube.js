@@ -1,52 +1,46 @@
-import YOUTUBE_API_KEY from '.././config/youtube.js';
+import YOUTUBE_API_KEY from '../config/youtube.js';
+// import SearchBar from '.././Search.js';
 
-var searchYouTube = (options, callback = () => {}) => {
-  $.ajax({
-    type: 'GET',
-    url: 'https://www.googleapis.com/youtube/v3/search',
-    options: {
-      key: YOUTUBE_API_KEY,
-      q: 'cats',
-      part: 'snippet',
-      maxResults: 5,
-      type: 'video',
-      videoEmbeddable: true
-    },
-    success: (data) => {
-      console.log(data);
-    },
-    error: (response) => {
-      console.log('Request Failed');
-    },
-    //done()
-  });
+var searchYouTube = ({key = YOUTUBE_API_KEY, query, max = 5}, callback = () => {}) => {
+  $.get('https://www.googleapis.com/youtube/v3/search', {
+    key: key,
+    q: query,
+    part: 'snippet',
+    maxResults: max,
+    type: 'video',
+    videoEmbeddable: true
+  })
+
+    .done(function(parameter) {
+      console.log('Success', parameter);
+      callback(parameter.items);
+    })
+
+    .fail(function(arg) {
+      console.log('Request Failed', arg);
+    });
 };
 
 
-// $.get('https://www.googleapis.com/youtube/v3/search', function options({key = 'API_KEY', q, maxResults = 5}) {
-
-// })
-
-// .done(options)
-
-// .fail(function() {
-//   console.log('Request Failed');
-// })
-/*
-getAll: function(callback = ()=>{}) {
-  $.ajax({
-    type: 'GET',
-    url: Parse.server,
-    data: { order: '-createdAt' },
-    contentType: 'application/json',
-    success: (data) => {
-      callback(data.results);
-    },
-    error: (status) => {
-      console.error('chatterbox: Failed to fetch messages', status);
-    }
-  });
-},
-*/
-
+// var searchYouTube = ({query, max = 5, key, callback = () => {}}) => {
+//   $.ajax({
+//     type: 'GET',
+//     url: 'https://www.googleapis.com/youtube/v3/search',
+//     options: {
+//       key: key,
+//       q: query,
+//       part: 'snippet',
+//       maxResults: max,
+//       type: 'video',
+//       videoEmbeddable: true
+//     },
+//     success: (data) => {
+//       console.log(data);
+//     },
+//     error: (response) => {
+//       console.log('Request Failed');
+//     },
+//     //done()
+//   });
+// };
 export default searchYouTube;
