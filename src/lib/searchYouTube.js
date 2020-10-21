@@ -20,7 +20,6 @@ var searchYouTube = ({key = YOUTUBE_API_KEY, query, max = 5}, callback = () => {
     });
 };
 
-
 // var searchYouTube = ({query, max = 5, key, callback = () => {}}) => {
 //   $.ajax({
 //     type: 'GET',
